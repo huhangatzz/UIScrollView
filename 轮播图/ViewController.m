@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "HU_ScycleScrollView.h"
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-@interface ViewController ()
+@interface ViewController ()<ScyleScrollViewDelegate>
 {
     HU_ScycleScrollView *_scyleSV;
 }
@@ -20,24 +20,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *images = @[@"http://img2.3lian.com/2014/f7/5/d/22.jpg",
-                        @"http://image.tianjimedia.com/uploadImages/2011/327/1VPRY46Q4GB7.jpg",
-                        @"http://img6.faloo.com/Picture/0x0/0/747/747488.jpg",
-                        @"http://i6.topit.me/6/5d/45/1131907198420455d6o.jpg"];
-    NSArray *titles = @[@"1http://i6.topit.me/6/5d/45/1131907198420455d6o.jpg",@"2http://i6.topit.me/6/5d/45/1131907198420455d6o.jpg",@"3http://i6.topit.me/6/5d/45/1131907198420455d6o.jpg",@"4http://i6.topit.me/6/5d/45/1131907198420455d6o.jpg"];
+//    NSArray *images = @[@"http://img5.imgtn.bdimg.com/it/u=2778082280,495752289&fm=21&gp=0.jpg",
+//                        @"http://img0.imgtn.bdimg.com/it/u=3314769904,2856776754&fm=21&gp=0.jpg",
+//                        @"http://img2.3lian.com/2014/f7/5/d/22.jpg",
+//                        @"http://f.hiphotos.baidu.com/image/h%3D360/sign=b023dbb2d739b60052ce09b1d9513526/f2deb48f8c5494ee55f2d7482ff5e0fe98257e8b.jpg",
+//                        @"http://a.hiphotos.baidu.com/image/h%3D200/sign=af9259bf03082838770ddb148898a964/6159252dd42a2834bc76c4ab5fb5c9ea14cebfba.jpg"];
     
-    _scyleSV = [[HU_ScycleScrollView alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 170) placeHolderImg:@"1.png" interval:3.0 imageArrs:images titleArrs:titles];
+    NSArray *images = @[@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.png"];
+    NSArray *titles = @[@"学校",@"学霸",@"学生",@"学渣",@"学习"];
+    _scyleSV = [[HU_ScycleScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 250) images:images];
+    //_scyleSV.placeHolderImg = [UIImage imageNamed:@"1"];
+    _scyleSV.delegate = self;
+    _scyleSV.titles = titles;
     [self.view addSubview:_scyleSV];
-    [self clickTheImgAction];
 }
 
-- (void)clickTheImgAction{
- 
-    _scyleSV.clickCurrentImgBlock = ^(NSInteger i){
-
-        NSLog(@"== %ld",(long)i);
-    };
-
+#pragma mark ScyleScrollViewDelegate
+- (void)scyleScrollView:(HU_ScycleScrollView *)scyleView index:(NSInteger)index{
+    NSLog(@"----- %ld",index);
 }
 
 - (void)didReceiveMemoryWarning {
